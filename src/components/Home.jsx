@@ -1,38 +1,31 @@
 import { useEffect, useState } from 'react'
 import heads from '../assets/resources/heads.svg'
-import shadow from '../assets/resources/shadow.svg'
+
 import tail from '../assets/resources/tails.svg'
 import Modal from './Modal'
 
 const Home = () => {
-    const coin = [heads, tail]
     const [count, setCount] = useState(0);
-    const [image, setImage] = useState(0)
     const [modal, showModal] = useState(false);
     const [dollarCount, setDollarCount] = useState(0);
 
-    function setDollar(count) {
-      count >= 100 ? setDollarCount(prev => prev + 1) : setDollarCount(prev => prev)
-    }
-
-    useEffect(() => setDollar(count), [count])
-
-    function getRandomImage() {
-        return Math.floor(Math.random() * 2)
-    }
+    
+    useEffect(() => {
+      const hundreds = Math.floor(count/100);
+      setDollarCount(hundreds)}, [count])
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-black text-white flex flex-col items-center justify-center px-4 py-8 gap-8 relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-black text-white flex flex-col items-center justify-center px-4 py-8 gap-5 relative overflow-hidden">
             {/* Animated background elements */}
             <div className="absolute w-96 h-96 bg-indigo-600/10 rounded-full -top-48 -left-48"></div>
             <div className="absolute w-96 h-96 bg-teal-600/10 rounded-full -bottom-48 -right-48"></div>
 
             <h1 className="font-bold text-5xl sm:text-6xl text-center bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-2xl">
-                Flip the Coin
+                Welcome to TAP MASTER!
             </h1>
 
             <p className="text-center max-w-lg text-sm sm:text-base font-medium text-cyan-100">
-                Press the coin or the button to flip the coin to earn money
+                Tap your way to billions
             </p>
 
             <div className="relative flex flex-col items-center cursor-pointer group transition-all duration-500"
@@ -41,25 +34,17 @@ const Home = () => {
                 }}>
                 <div className="relative transition-transform duration-500 group-hover:scale-110 group-active:scale-95">
                     <img 
-                        className={`w-48 h-48 sm:w-64 sm:h-64 transition-all duration-500 z-50 ${
-                            image ? 'rotate-y-0' : 'rotate-y-180'
-                        }`}
+                        className={`w-48 h-48 sm:w-64 sm:h-64 transition-all duration-500 z-50`}
                         src={heads} 
                         alt="Coin" 
-                        // style={{ backfaceVisibility: 'hidden' }}
                     />
                     <div className="absolute inset-0 rounded-full shadow-xl shadow-blue-900/50 group-hover:shadow-cyan-400/30 transition-shadow duration-300"></div>
                 </div>
-                {/* <img 
-                    className="w-40 sm:w-52 mt-[-1.5rem] opacity-80 blur-[2px] group-hover:blur-[4px] group-hover:scale-125 transition-all duration-300" 
-                    src={shadow} 
-                    alt="Coin shadow" 
-                /> */}
             </div>
 
             <div className="space-y-2 text-center">
                 <p className="text-4xl font-black bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent animate-pulse">
-                    ${count}
+                    {count} EIA
                 </p>
                 <p className="text-lg sm:text-xl font-semibold text-amber-300/90">
                     You currently have <span className="text-2xl font-bold text-amber-400">${dollarCount}</span>
