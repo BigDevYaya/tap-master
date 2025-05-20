@@ -22,39 +22,62 @@ const Home = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-black text-white flex flex-col items-center justify-center px-4 py-8 gap-8">
-            <h1 className="font-extrabold text-4xl sm:text-5xl text-center">Flip the Coin</h1>
-            <p className="text-center max-w-md text-sm sm:text-base font-medium">
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-black text-white flex flex-col items-center justify-center px-4 py-8 gap-8 relative overflow-hidden">
+            {/* Animated background elements */}
+            <div className="absolute w-96 h-96 bg-indigo-600/10 rounded-full -top-48 -left-48"></div>
+            <div className="absolute w-96 h-96 bg-teal-600/10 rounded-full -bottom-48 -right-48"></div>
+
+            <h1 className="font-bold text-5xl sm:text-6xl text-center bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-2xl">
+                Flip the Coin
+            </h1>
+
+            <p className="text-center max-w-lg text-sm sm:text-base font-medium text-cyan-100">
                 Press the coin or the button to flip the coin to earn money
             </p>
 
-            <div className="relative flex flex-col items-center cursor-pointer group transition-all duration-300"
+            <div className="relative flex flex-col items-center cursor-pointer group transition-all duration-500"
                 onClick={() => {
                     setCount(prev => prev + 1)
                 }}>
-                <img 
-                    className="w-40 h-40 sm:w-56 sm:h-56 transition-transform duration-500 group-hover:scale-110 drop-shadow-lg" 
-                    src={coin.at(image)} 
-                    alt="Coin" 
-                />
-                <img 
-                    className="w-32 sm:w-48 mt-[-1.5rem] opacity-80" 
+                <div className="relative transition-transform duration-500 group-hover:scale-110 group-active:scale-95">
+                    <img 
+                        className={`w-48 h-48 sm:w-64 sm:h-64 transition-all duration-500 z-50 ${
+                            image ? 'rotate-y-0' : 'rotate-y-180'
+                        }`}
+                        src={heads} 
+                        alt="Coin" 
+                        // style={{ backfaceVisibility: 'hidden' }}
+                    />
+                    <div className="absolute inset-0 rounded-full shadow-xl shadow-blue-900/50 group-hover:shadow-cyan-400/30 transition-shadow duration-300"></div>
+                </div>
+                {/* <img 
+                    className="w-40 sm:w-52 mt-[-1.5rem] opacity-80 blur-[2px] group-hover:blur-[4px] group-hover:scale-125 transition-all duration-300" 
                     src={shadow} 
                     alt="Coin shadow" 
-                />
+                /> */}
             </div>
 
-            <p className="text-3xl font-black text-green-400">${count}</p>
-            <p className="text-lg sm:text-xl font-semibold text-yellow-300">
-                You currently have ${dollarCount}
-            </p>
+            <div className="space-y-2 text-center">
+                <p className="text-4xl font-black bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent animate-pulse">
+                    ${count}
+                </p>
+                <p className="text-lg sm:text-xl font-semibold text-amber-300/90">
+                    You currently have <span className="text-2xl font-bold text-amber-400">${dollarCount}</span>
+                </p>
+            </div>
 
             <button 
-                className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-full shadow-lg transition duration-300"
+                className="group relative bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold px-8 py-3 rounded-xl shadow-2xl shadow-blue-900/50 hover:shadow-cyan-500/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
                 onClick={() => {
                     showModal(prev => !prev)
                 }}>
-                Buy More Coin
+                <span className="relative z-10 flex items-center gap-2">
+                    <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 0l3 6h6l-3 6 3 6h-6l-3 6-3-6H0l3-6-3-6h6z"/>
+                    </svg>
+                    Buy More Coin
+                </span>
+                <div className="absolute inset-0 bg-white/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
 
             {modal && <Modal setCount={setCount} showModal={showModal} />}
