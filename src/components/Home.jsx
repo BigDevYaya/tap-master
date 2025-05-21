@@ -103,7 +103,7 @@ const Home = () => {
             </button>
 
             <nav>
-              <ul className='flex items-center justify-between space-x-10 mt-10 fixed bottom-35  right-25 bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-10 py-5 rounded-2xl'>
+              <ul className='flex items-center justify-between space-x-10 mt-10 fixed bottom-0  right-25 bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-10 py-5 rounded-2xl'>
                 <li><User /></li>
                 <li><ShoppingBasketIcon /></li>
                 <li><UserPlus /></li>
