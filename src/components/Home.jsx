@@ -6,7 +6,11 @@ import Modal from './Modal'
 import Header from './Header'
 
 const Home = () => {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(() => {
+    // Retrieve the count from localStorage or default to 0
+    const savedCount = localStorage.getItem('count');
+    return savedCount !== null ? JSON.parse(savedCount) : 0;
+  });
     const [modal, showModal] = useState(false);
     const [dollarCount, setDollarCount] = useState(0);
     const [plusOnes, setPlusOnes] = useState([]);
@@ -21,6 +25,11 @@ const Home = () => {
     useEffect(() => {
       const hundreds = Math.fround((count/100000)).toFixed(3);
       setDollarCount(hundreds)}, [count])
+
+    useEffect(() => {
+    // Update localStorage whenever count changes
+    localStorage.setItem('count', JSON.stringify(count));
+  }, [count]);
 
     const handleCoinClick = () => {
         setCount(prev => prev + 1);

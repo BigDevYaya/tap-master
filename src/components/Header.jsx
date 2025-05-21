@@ -9,7 +9,7 @@ const Header = ({count}) => {
          font-bold text-amber-400">${count}</p>
         {
             count >= 10 && <button
-            className="group relative bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold px-8 py-3 rounded-xl shadow-2xl shadow-blue-900/50 hover:shadow-cyan-500/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">Withdraw earnings</button>
+            className="group relative bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-sm font-semibold px-8 py-3 rounded-xl shadow-2xl shadow-blue-900/50 hover:shadow-cyan-500/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">Withdraw earnings</button>
         }
         </div>
     </header>
