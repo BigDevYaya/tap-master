@@ -4,6 +4,7 @@ import heads from '../assets/resources/heads.svg'
 import tail from '../assets/resources/tails.svg'
 import Modal from './Modal'
 import Header from './Header'
+import { ShoppingBasketIcon, User, UserPlus } from 'lucide-react'
 
 const Home = () => {
     const [count, setCount] = useState(() => {
@@ -100,6 +101,14 @@ const Home = () => {
                 </span>
                 <div className="absolute inset-0 bg-white/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
+
+            <nav>
+              <ul className='flex items-center justify-between space-x-10 mt-10 fixed bottom-35  right-25 bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-10 py-5 rounded-2xl'>
+                <li><User /></li>
+                <li><ShoppingBasketIcon /></li>
+                <li><UserPlus /></li>
+              </ul>
+            </nav>
 
             {modal && <Modal setCount={setCount} showModal={showModal} />}
         </div>
