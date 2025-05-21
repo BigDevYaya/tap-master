@@ -42,66 +42,73 @@ const Home = () => {
     }
 
     return (
-      <div className='bg-gradient-to-br from-gray-900 via-blue-900 to-black text-white overflow-hidden relative min-h-svh'>
-        <div className="absolute w-96 h-96 bg-indigo-600/10 rounded-full -top-48 -left-48 animate-pulse"></div>
-            <div className="absolute w-96 h-96 bg-teal-600/10 rounded-full -bottom-48 -right-48 animate-pulse"></div>
-        <Header count={dollarCount} />
-      <div className="flex flex-col items-center justify-center px-4 py-8 gap-5 ">
-          {plusOnes.map((plusOne) => (
-                <span
-                    key={plusOne.id}
-                    className="absolute text-2xl font-bold text-green-400 animate-float z-50"
-                    style={{
-                        left: `calc(50% + ${plusOne.offset}px)`,
-                        top: '50%'
-                    }}
-                >
-                    +1
-                </span>
-            ))}
-            
-          
-            <h1 className="font-bold text-5xl sm:text-6xl text-center bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-2xl">
-                Welcome to TAP MASTER!
-            </h1>
+      <div className='bg-gradient-to-br from-[#00072D] via-[#00156E] to-[#000B3A] text-white overflow-hidden relative min-h-svh'>
+  <div className="absolute w-96 h-96 bg-indigo-900/20 rounded-full -top-48 -left-48 animate-pulse"></div>
+  <div className="absolute w-96 h-96 bg-blue-900/20 rounded-full -bottom-48 -right-48 animate-pulse"></div>
+  
+  <Header count={dollarCount} />
+  
+  <div className="flex flex-col items-center justify-center px-4 py-8 gap-5 ">
+    {plusOnes.map((plusOne) => (
+      <span
+        key={plusOne.id}
+        className="absolute text-2xl font-bold text-cyan-400 animate-float z-50"
+        style={{
+          left: `calc(50% + ${plusOne.offset}px)`,
+          top: '50%'
+        }}
+      >
+        +1
+      </span>
+    ))}
 
-            <p className="text-center max-w-lg text-sm sm:text-base font-medium text-cyan-100">
-                Tap your way to finacial freedom
-            </p>
+    <h1 className="font-bold text-5xl sm:text-6xl text-center bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent drop-shadow-[0_5px_15px_rgba(34,211,238,0.5)]">
+      Welcome to TAP MASTER!
+    </h1>
 
-            <div className="relative flex flex-col items-center cursor-pointer group transition-all duration-500"
-                onClick={handleCoinClick}>
-                <div className="relative transition-transform duration-500 group-hover:scale-110 group-active:scale-95">
-                    <img 
-                        className={`w-48 h-48 sm:w-64 sm:h-64 transition-all duration-500 z-50`}
-                        src={heads} 
-                        alt="Coin" 
-                    />
-                    <div className="absolute inset-0 rounded-full shadow-xl shadow-blue-900/50 group-hover:shadow-cyan-400/30 transition-shadow duration-300"></div>
-                </div>
-            </div>
+    <p className="text-center max-w-lg text-sm sm:text-base font-medium text-cyan-200/90">
+      Tap your way to financial freedom
+    </p>
 
-            <div className="space-y-2 text-center">
-                <p className="text-4xl font-black bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent animate-pulse">
-                    {count} EIA
-                </p>  
-            </div>
-
-            <nav
-            className="group relative bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold px-8 py-3 rounded-xl shadow-2xl shadow-blue-900/50 hover:shadow-cyan-500/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
-              <ul className='flex items-center justify-between space-x-10 mt-10 fixed bottom-10  right-25 bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-10 py-5 rounded-2xl'>
-                <li><User /></li>
-                <li><ShoppingBasketIcon onClick={() => {
-                    showModal(prev => !prev)
-                }}/></li>
-                <li><UserPlus /></li>
-              </ul>
-              {/* <div className="absolute inset-0 bg-white/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div> */}
-            </nav>
-
-            {modal && <Modal setCount={setCount} showModal={showModal} />}
-        </div>
+    <div className="relative flex flex-col items-center cursor-pointer group transition-all duration-500"
+      onClick={handleCoinClick}>
+      <div className="relative transition-transform duration-500 group-hover:scale-110 group-active:scale-95">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-500/10 rounded-full blur-xl animate-pulse"></div>
+        <img 
+          className="w-48 h-48 sm:w-64 sm:h-64 transition-all duration-500 z-50 drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]"
+          src={heads} 
+          alt="Coin" 
+        />
+        <div className="absolute inset-0 rounded-full shadow-xl shadow-blue-900/50 group-hover:shadow-cyan-400/40 transition-shadow duration-300"></div>
       </div>
+    </div>
+
+    <div className="space-y-2 text-center mb-8">
+      <p className="text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent animate-pulse">
+        {count} EIA
+      </p>  
+    </div>
+
+    <nav className="group relative bg-gradient-to-br from-indigo-700 via-[#00156E] to-blue-800 hover:from-indigo-600 hover:via-[#001399] hover:to-blue-700 text-white font-semibold px-8 py-3 rounded-xl shadow-2xl shadow-[#00156E]/50 hover:shadow-blue-500/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+      <ul className='flex items-center justify-between space-x-10 fixed bottom-10 right-17 px-10 py-5 rounded-2xl'>
+        <li className="p-3 rounded-lg hover:bg-indigo-700/30 transition-colors">
+          <User className="w-6 h-6 text-cyan-400" />
+        </li>
+        <li 
+          className="p-3 rounded-lg hover:bg-indigo-700/30 transition-colors"
+          onClick={() => showModal(prev => !prev)}
+        >
+          <ShoppingBasketIcon className="w-6 h-6 text-cyan-400" />
+        </li>
+        <li className="p-3 rounded-lg hover:bg-indigo-700/30 transition-colors">
+          <UserPlus className="w-6 h-6 text-cyan-400" />
+        </li>
+      </ul>
+    </nav>
+
+    {modal && <Modal setCount={setCount} showModal={showModal} />}
+  </div>
+</div>
     )
 }
 
