@@ -84,30 +84,19 @@ const Home = () => {
             <div className="space-y-2 text-center">
                 <p className="text-4xl font-black bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent animate-pulse">
                     {count} EIA
-                </p>
-               
+                </p>  
             </div>
 
-            <button 
-                className="group relative bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold px-8 py-3 rounded-xl shadow-2xl shadow-blue-900/50 hover:shadow-cyan-500/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
-                onClick={() => {
-                    showModal(prev => !prev)
-                }}>
-                <span className="relative z-10 flex items-center gap-2">
-                    <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                        <path d="M12 0l3 6h6l-3 6 3 6h-6l-3 6-3-6H0l3-6-3-6h6z"/>
-                    </svg>
-                    Buy More Coin
-                </span>
-                <div className="absolute inset-0 bg-white/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </button>
-
-            <nav>
-              <ul className='flex items-center justify-between space-x-10 mt-10 fixed bottom-0  right-25 bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-10 py-5 rounded-2xl'>
+            <nav
+            className="group relative bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold px-8 py-3 rounded-xl shadow-2xl shadow-blue-900/50 hover:shadow-cyan-500/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+              <ul className='flex items-center justify-between space-x-10 mt-10 fixed bottom-10  right-25 bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-10 py-5 rounded-2xl'>
                 <li><User /></li>
-                <li><ShoppingBasketIcon /></li>
+                <li><ShoppingBasketIcon onClick={() => {
+                    showModal(prev => !prev)
+                }}/></li>
                 <li><UserPlus /></li>
               </ul>
+              {/* <div className="absolute inset-0 bg-white/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div> */}
             </nav>
 
             {modal && <Modal setCount={setCount} showModal={showModal} />}
