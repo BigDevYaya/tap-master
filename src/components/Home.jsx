@@ -5,6 +5,7 @@ import tail from '../assets/resources/tails.svg'
 import Modal from './Modal'
 import Header from './Header'
 import { ShoppingBasketIcon, User, UserPlus } from 'lucide-react'
+import WithdrawModal from './WithdrawModal'
 
 const Home = () => {
     const [count, setCount] = useState(() => {
@@ -12,6 +13,7 @@ const Home = () => {
     const savedCount = localStorage.getItem('count');
     return savedCount !== null ? JSON.parse(savedCount) : 0;
   });
+    const [withdrawModal, showWithdrawModal] = useState(false);
     const [modal, showModal] = useState(false);
     const [dollarCount, setDollarCount] = useState(0);
     const [plusOnes, setPlusOnes] = useState([]);
@@ -28,7 +30,6 @@ const Home = () => {
       setDollarCount(hundreds)}, [count])
 
     useEffect(() => {
-    // Update localStorage whenever count changes
     localStorage.setItem('count', JSON.stringify(count));
   }, [count]);
 
@@ -46,7 +47,10 @@ const Home = () => {
   <div className="absolute w-96 h-96 bg-indigo-900/20 rounded-full -top-48 -left-48 animate-pulse"></div>
   <div className="absolute w-96 h-96 bg-blue-900/20 rounded-full -bottom-48 -right-48 animate-pulse"></div>
   
-  <Header count={dollarCount} />
+  <Header count={dollarCount} modal={showWithdrawModal} />
+  {
+    withdrawModal && <WithdrawModal />
+  }
   
   <div className="flex flex-col items-center justify-center px-4 py-8 gap-5 ">
     {plusOnes.map((plusOne) => (
@@ -91,14 +95,14 @@ const Home = () => {
 
     <nav className="fixed bottom-10 bg-[#002080] rounded-2xl shadow-2xl p-4">
           <ul className="flex items-center space-x-10">
-            <li><User className="w-6 h-6 text-[#c0d6e4] hover:text-white transition" /></li>
+            <li><User className="w-6 h-6 text-[#c0d6e4] hover:text-white transition cursor-pointer" /></li>
             <li>
               <ShoppingBasketIcon
                 className="w-6 h-6 text-[#c0d6e4] hover:text-white transition cursor-pointer"
                 onClick={() => showModal(prev => !prev)}
               />
             </li>
-            <li><UserPlus className="w-6 h-6 text-[#c0d6e4] hover:text-white transition" /></li>
+            <li><UserPlus className="w-6 h-6 text-[#c0d6e4] hover:text-white transition cursor-pointer" /></li>
           </ul>
         </nav>
 
