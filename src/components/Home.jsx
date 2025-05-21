@@ -47,9 +47,9 @@ const Home = () => {
   <div className="absolute w-96 h-96 bg-indigo-900/20 rounded-full -top-48 -left-48 animate-pulse"></div>
   <div className="absolute w-96 h-96 bg-blue-900/20 rounded-full -bottom-48 -right-48 animate-pulse"></div>
   
-  <Header count={dollarCount} modal={showWithdrawModal} />
+  <Header count={dollarCount} modal={showWithdrawModal}  />
   {
-    withdrawModal && <WithdrawModal />
+    withdrawModal && <WithdrawModal modal={showWithdrawModal} />
   }
   
   <div className="flex flex-col items-center justify-center px-4 py-8 gap-5 ">
@@ -65,10 +65,6 @@ const Home = () => {
         +1
       </span>
     ))}
-
-    <h1 className="font-bold text-5xl sm:text-6xl text-center bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent drop-shadow-[0_5px_15px_rgba(34,211,238,0.5)]">
-      Welcome to TAP MASTER!
-    </h1>
 
     <p className="text-center max-w-lg text-sm sm:text-base font-medium text-cyan-200/90">
       Tap your way to financial freedom
