@@ -5,7 +5,7 @@ const Modal = ({setCount, showModal, modal}) => {
     const [isLoading, setIsLoading] = useState(false);
   return (
     <div 
-    className='fixed inset-0 grid place-items-center bg-black/50'
+    className='fixed inset-0 grid place-items-center bg-black/50 md:absolute'
     >
         <div 
         className='absolute h-full w-full'
@@ -15,7 +15,7 @@ const Modal = ({setCount, showModal, modal}) => {
     }}>
         </div>
         <div
-        className='bg-[#131949] text-white px-6 py-5 rounded-sm z-50'>
+        className='relative bg-[#131949] text-white px-6 py-5 rounded-sm z-50 md:-left-1/3 md:-top-2/10'>
         <X 
         className='relative -right-11/12'
         onClick={() => showModal(prev => !prev)} />
