@@ -176,7 +176,7 @@ const Home = ({ name }) => {
                 <button
                   className="bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-sm font-bold px-3 py-2 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95"
                 >
-                  Increase
+                  Buy
                 </button>
               </div>
 
