@@ -14,32 +14,44 @@ const Modal = ({setCount, showModal, modal}) => {
         console.log(modal)
     }}>
         </div>
-        <div
-        className='relative bg-[#131949] text-white px-6 py-5 rounded-sm z-50 md:-left-1/3 md:-top-2/10'>
-        <X 
-        className='relative -right-11/12'
-        onClick={() => showModal(prev => !prev)} />
-        <div className='z-50'>
-            <h1>Buy More Coins to increase your earnings</h1>
-            <button
-            className="w-full flex items-center justify-center gap-5 mt-4 bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold py-3 rounded-xl shadow-2xl transition-transform transform hover:scale-105"
-            onClick={(e)=> {
-                e.preventDefault();
-                setIsLoading(prev => !prev)
-                setTimeout(() => 
-                    {
-                        setIsLoading(prev => !prev)
-                        setCount(prev => prev + 100000)
-                        showModal(prev => !prev)
-                    }, 2000),
-                console.log(modal)
-            }}>
-                {
-                    isLoading ? <span class="loader" ></span> : <p className='flex items-center justify-center gap-3'>Buy <ShoppingBag /> </p>
-                }
-            </button>
-        </div>
-        </div>
+        <div className='bg-[#131949] rounded-3xl py-6 px-6 shadow-2xl flex flex-col gap-5 mx-7 border border-blue-700'>
+              <p className='text-2xl font-bold text-white border-b-4 border-blue-500 pb-4 text-center'>
+              Get Boosts at Discount Prices Now!
+              </p>
+
+              <div className='flex items-center justify-between bg-[#0b1033] p-4 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:bg-[#151c4e]'>
+                <p className='text-white text-lg'>
+                  Get 100,000 coins now at <span className='text-green-400 font-bold text-xl'>$0.8</span>!
+                </p>
+                <button
+                  className="bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-sm font-bold px-3 py-2 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95"
+                >
+                  Buy
+                </button>
+              </div>
+
+              <div className='flex items-center justify-between bg-[#0b1033] p-4 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:bg-[#151c4e]'>
+                <p className='text-white text-lg'>
+                  Increase Tap Limit at <span className='text-green-400 font-bold text-xl'>$0.8</span>!
+                </p>
+                <button
+                  className="bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-sm font-bold px-3 py-2 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95"
+                >
+                  Buy
+                </button>
+              </div>
+
+              <div className='flex items-center justify-between bg-[#0b1033] p-4 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:bg-[#151c4e]'>
+                <p className='text-white text-lg'>
+                  Activate bot at <span className='text-green-400 font-bold text-xl'>$12</span>!
+                </p>
+                <button
+                  className="bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-sm font-bold px-3 py-2 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95"
+                >
+                  Buy
+                </button>
+              </div>
+            </div>
     </div>
   )
 }
