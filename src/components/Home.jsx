@@ -19,18 +19,17 @@ const Home = ({name}) => {
     const [profileModal, showProfileModal] = useState(false);
     const [withdrawModal, showWithdrawModal] = useState(false);
     const [modal, showModal] = useState(false);
-    const [dollarCount, setDollarCount] = useState(0);
+    const [dollarCount, setDollarCount] = useState();
     const [plusOnes, setPlusOnes] = useState([]);
 
-    const [pin, setPin] = useState(0);
-    const [sendAmount, setSendAmount] = useState(0)
+    const [pin, setPin] = useState();
+    const [sendAmount, setSendAmount] = useState()
     const [walletAddress, setWalletAddress] = useState("");
 
     let valid = false
 
 
-    function checkAddress() {
-        const walletAddress = address
+    function checkInputs() {
         const inputedAmount = sendAmount
         const inputedPin = pin
         const userPin = 1234
@@ -49,7 +48,7 @@ const Home = ({name}) => {
 
     function makeTransfer(){
         const sendAmountCoin = sendAmount * 100000
-        setCount(prev => prev - sendAmountCoin)
+      valid ? setCount(prev => prev - sendAmountCoin) : alert('invalid')
     }
 
     useEffect(() => {
@@ -93,7 +92,8 @@ const Home = ({name}) => {
     pinOnchange={(e) => setPin(Number(e.target.value))}
     dollarCount={dollarCount}
     coinCoint={count}
-    makeTransfer={makeTransfer}/>
+    makeTransfer={makeTransfer}
+    checkInputs={checkInputs}/>
   }
   
   <div className="flex flex-col items-center justify-center px-4 py-8 gap-5 ">
