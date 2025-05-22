@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Spinner } from "flowbite-react"
 
-const Login = () => {
+const Login = ({name, onChange}) => {
     const [isLoading, setLoading] = useState(false)
     const navigate = useNavigate();
   return (
@@ -22,6 +22,8 @@ const Login = () => {
     <label className="block text-gray-200 uppercase">Enter your name</label>
     <input
       type="text"
+      value={name}
+      onChange={onChange}
       className="w-full bg-transparent border border-gray-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
 

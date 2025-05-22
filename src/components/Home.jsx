@@ -8,7 +8,7 @@ import WithdrawModal from './WithdrawModal'
 import ProfileModal from './ProfileModal'
 import HistoryModal from './HistoryModal'
 
-const Home = () => {
+const Home = ({name}) => {
 
     const [count, setCount] = useState(() => {
     // Retrieve the count from localStorage or default to 0
@@ -21,7 +21,36 @@ const Home = () => {
     const [modal, showModal] = useState(false);
     const [dollarCount, setDollarCount] = useState(0);
     const [plusOnes, setPlusOnes] = useState([]);
+
+    const [pin, setPin] = useState(0);
+    const [sendAmount, setSendAmount] = useState(0)
     const [walletAddress, setWalletAddress] = useState("");
+
+    let valid = false
+
+
+    function checkAddress() {
+        const walletAddress = address
+        const inputedAmount = sendAmount
+        const inputedPin = pin
+        const userPin = 1234
+        if(walletAddress.length < 10 || !walletAddress.includes('a')){
+            return valid = false
+        } 
+        if(inputedAmount > dollarCount){
+            return valid = false
+        }
+        if(inputedPin !== userPin){
+            return valid = false
+        }
+
+        return valid = true
+    }
+
+    function makeTransfer(){
+        const sendAmountCoin = sendAmount * 100000
+        setCount(prev => prev - sendAmountCoin)
+    }
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -54,7 +83,17 @@ const Home = () => {
   
   <Header count={dollarCount} modal={showWithdrawModal}  />
   {
-    withdrawModal && <WithdrawModal modal={showWithdrawModal} address={walletAddress} addressOnchange={(e) => setWalletAddress(e.target.value)} />
+    withdrawModal && <WithdrawModal 
+    modal={showWithdrawModal} 
+    address={walletAddress} 
+    addressOnchange={(e) => setWalletAddress(e.target.value)}
+    sendAmount={sendAmount}
+    amountOnchange={(e) => setSendAmount(Number(e.target.value))} 
+    pin={pin}
+    pinOnchange={(e) => setPin(Number(e.target.value))}
+    dollarCount={dollarCount}
+    coinCoint={count}
+    makeTransfer={makeTransfer}/>
   }
   
   <div className="flex flex-col items-center justify-center px-4 py-8 gap-5 ">
@@ -146,7 +185,7 @@ const Home = () => {
 
     {modal && <Modal setCount={setCount} showModal={showModal} modal={modal} />}
     {
-      profileModal && <ProfileModal coin={count} dollar={dollarCount} modal={showProfileModal} />
+      profileModal && <ProfileModal coin={count} dollar={dollarCount} modal={showProfileModal} name={name} />
     }
     {
       historyModal && <HistoryModal modal={showHistoryModal} />

@@ -1,7 +1,8 @@
-import { X } from 'lucide-react'
-import React from 'react'
+import { ShoppingBag, X } from 'lucide-react'
+import React, { useState } from 'react'
 
 const Modal = ({setCount, showModal, modal}) => {
+    const [isLoading, setIsLoading] = useState(false);
   return (
     <div 
     className='fixed inset-0 grid place-items-center bg-black/50'
@@ -21,12 +22,22 @@ const Modal = ({setCount, showModal, modal}) => {
         <div className='z-50'>
             <h1>Buy More Coins to increase your earnings</h1>
             <button
-            className='bg-blue-400 px-7  rounded uppercase py-1.5'
-            onClick={()=> {
-                // setTimeout(() => setCount(prev => prev + 100000), 2000),
-                showModal(prev => !prev)
+            className="w-full flex items-center justify-center gap-5 mt-4 bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold py-3 rounded-xl shadow-2xl transition-transform transform hover:scale-105"
+            onClick={(e)=> {
+                e.preventDefault();
+                setIsLoading(prev => !prev)
+                setTimeout(() => 
+                    {
+                        setIsLoading(prev => !prev)
+                        setCount(prev => prev + 100000)
+                        showModal(prev => !prev)
+                    }, 2000),
                 console.log(modal)
-            }}>Buy</button>
+            }}>
+                {
+                    isLoading ? <span class="loader" ></span> : <p className='flex items-center justify-center gap-3'>Buy <ShoppingBag /> </p>
+                }
+            </button>
         </div>
         </div>
     </div>
