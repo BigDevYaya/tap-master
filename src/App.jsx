@@ -1,11 +1,17 @@
+import { BrowserRouter, Routes, Route } from "react-router"
 import Home from "./components/Home"
+import Login from "./Pages/Login"
+
 
 
 function App() {
   return (
-    <body>
-      <Home />
-    </body>
+    <>
+      <Routes>
+        <Route index element={<Login />} />
+        <Route path="/home" element={<Home />} />      
+      </Routes>
+    </>
   )
 }
 

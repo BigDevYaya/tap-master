@@ -1,22 +1,27 @@
 import { useEffect, useState } from 'react'
 import heads from '../assets/resources/heads.svg'
 
-import tail from '../assets/resources/tails.svg'
 import Modal from './Modal'
 import Header from './Header'
-import { ShoppingBasketIcon, User, UserPlus } from 'lucide-react'
+import { HistoryIcon, ShoppingBasketIcon, User, UserPlus } from 'lucide-react'
 import WithdrawModal from './WithdrawModal'
+import ProfileModal from './ProfileModal'
+import HistoryModal from './HistoryModal'
 
 const Home = () => {
+
     const [count, setCount] = useState(() => {
     // Retrieve the count from localStorage or default to 0
     const savedCount = localStorage.getItem('count');
     return savedCount !== null ? JSON.parse(savedCount) : 0;
   });
+    const [historyModal, showHistoryModal] = useState(false);
+    const [profileModal, showProfileModal] = useState(false);
     const [withdrawModal, showWithdrawModal] = useState(false);
     const [modal, showModal] = useState(false);
     const [dollarCount, setDollarCount] = useState(0);
     const [plusOnes, setPlusOnes] = useState([]);
+    const [walletAddress, setWalletAddress] = useState("");
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -49,7 +54,7 @@ const Home = () => {
   
   <Header count={dollarCount} modal={showWithdrawModal}  />
   {
-    withdrawModal && <WithdrawModal modal={showWithdrawModal} />
+    withdrawModal && <WithdrawModal modal={showWithdrawModal} address={walletAddress} addressOnchange={(e) => setWalletAddress(e.target.value)} />
   }
   
   <div className="flex flex-col items-center justify-center px-4 py-8 gap-5 ">
@@ -59,7 +64,8 @@ const Home = () => {
         className="absolute text-2xl font-bold text-cyan-400 animate-float z-50"
         style={{
           left: `calc(50% + ${plusOne.offset}px)`,
-          top: '50%'
+          right: `calc(50% + ${plusOne.offset}px)`,
+          top: '45%'
         }}
       >
         +1
@@ -89,20 +95,62 @@ const Home = () => {
       </p>  
     </div>
 
-    <nav className="fixed bottom-10 bg-[#002080] rounded-2xl shadow-2xl p-4">
+    <nav className={`fixed bottom-10 bg-[#002080] rounded-2xl shadow-2xl p-4 ${
+      !withdrawModal && 'z-50' 
+    }`}>
           <ul className="flex items-center space-x-10">
-            <li><User className="w-6 h-6 text-[#c0d6e4] hover:text-white transition cursor-pointer" /></li>
+            <li><User 
+            className="w-6 h-6 text-[#c0d6e4] hover:text-white transition cursor-pointer" 
+            onClick={() => {
+              if(modal) {
+                showModal(prev => !prev)
+                showProfileModal(prev => !prev)
+              } else if(historyModal){
+                showHistoryModal(prev => !prev)
+                showProfileModal(prev => !prev)
+              }else {
+                showProfileModal(prev => !prev)
+              }
+              }}/></li>
             <li>
               <ShoppingBasketIcon
                 className="w-6 h-6 text-[#c0d6e4] hover:text-white transition cursor-pointer"
-                onClick={() => showModal(prev => !prev)}
+                onClick={() => {
+                  if(profileModal){
+                    showProfileModal(prev => !prev)
+                    showModal(prev => !prev)
+                  } else if (historyModal) {
+                    showHistoryModal(prev => !prev)
+                    showModal(prev => !prev)
+                  } else {
+                    showModal(prev => !prev)
+                  }
+                  console.log(modal)
+                }}
               />
             </li>
-            <li><UserPlus className="w-6 h-6 text-[#c0d6e4] hover:text-white transition cursor-pointer" /></li>
+            <li><HistoryIcon className="w-6 h-6 text-[#c0d6e4] hover:text-white transition cursor-pointer"
+            onClick={() => {
+              if(modal){
+                showModal(prev => !prev)
+                showHistoryModal(prev => !prev)
+              } else if(profileModal) {
+                showProfileModal(prev => !prev)
+                showHistoryModal(prev => !prev)
+              } else {
+                showHistoryModal(prev => !prev)
+              }
+            }}/></li>
           </ul>
         </nav>
 
-    {modal && <Modal setCount={setCount} showModal={showModal} />}
+    {modal && <Modal setCount={setCount} showModal={showModal} modal={modal} />}
+    {
+      profileModal && <ProfileModal coin={count} dollar={dollarCount} modal={showProfileModal} />
+    }
+    {
+      historyModal && <HistoryModal modal={showHistoryModal} />
+    }
   </div>
 </div>
     )

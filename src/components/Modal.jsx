@@ -1,14 +1,20 @@
 import { X } from 'lucide-react'
 import React from 'react'
 
-const Modal = ({setCount, showModal}) => {
+const Modal = ({setCount, showModal, modal}) => {
   return (
     <div 
-    className='fixed grid place-items-center min-w-svh min-h-svh'
-    onClick={() => showModal(prev => !prev)}
+    className='fixed inset-0 grid place-items-center bg-black/50'
     >
+        <div 
+        className='absolute h-full w-full'
+        onClick={() => {
+        showModal(prev => !prev)
+        console.log(modal)
+    }}>
+        </div>
         <div
-        className='absolute bg-[#131949] text-white px-6 py-5 rounded-sm bottom-10 z-50'>
+        className='bg-[#131949] text-white px-6 py-5 rounded-sm z-50'>
         <X 
         className='relative -right-11/12'
         onClick={() => showModal(prev => !prev)} />
@@ -17,8 +23,9 @@ const Modal = ({setCount, showModal}) => {
             <button
             className='bg-blue-400 px-7  rounded uppercase py-1.5'
             onClick={()=> {
-                showModal(prev => !prev),
-                setTimeout(() => setCount(prev => prev + 100000), 2000)
+                // setTimeout(() => setCount(prev => prev + 100000), 2000),
+                showModal(prev => !prev)
+                console.log(modal)
             }}>Buy</button>
         </div>
         </div>

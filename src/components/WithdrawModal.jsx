@@ -1,13 +1,15 @@
 
 
-const WithdrawModal = ({modal}) => {
+const WithdrawModal = ({modal, address, addressOnchange}) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
-    onClick={()=> modal(prev => !prev)}>
+    >
   <form className="bg-[#131949] p-6 rounded-2xl space-y-4 w-full max-w-md">
     <label className="block text-gray-200">Wallet Address</label>
     <input
       type="text"
+      value={address}
+      onChange={addressOnchange}
       className="w-full bg-transparent border border-gray-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
 
