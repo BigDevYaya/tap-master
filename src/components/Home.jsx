@@ -66,7 +66,7 @@ const Home = ({ name }) => {
   }
 
   return (
-    <div className=' bg-gradient-to-br from-[#001133] via-[#002255] to-[#001144] text-white min-h-screen relative overflow-x-hidden md:grid md:place-items-center'>
+    <div className=' bg-gradient-to-br from-[#001133] via-[#002255] to-[#001144] text-white min-h-screen relative overflow-x-hidden md:grid md:place-items-center select-none'>
       {/* Header */}
       <Header count={dollarCount} modal={showWithdrawModal} />
 
