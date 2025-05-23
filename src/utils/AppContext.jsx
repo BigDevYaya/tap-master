@@ -33,8 +33,10 @@ export const AppProvider = ({children}) => {
 
   function makeTransfer() {
     const sendAmountCoin = sendAmount * 100000
-    valid ? setCount(prev => prev - sendAmountCoin) : alert('invalid')
-  }
+    if(checkInputs()){ setCount(prev => prev - sendAmountCoin)} else{
+    alert('invalid')
+    }
+    }
 
   useEffect(() => {
     const timer = setTimeout(() => setPlusOnes(prev => prev.slice(1)), 1000)
