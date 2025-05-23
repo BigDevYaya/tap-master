@@ -1,22 +1,11 @@
-import { ShoppingBag, X } from 'lucide-react'
-import React, { useContext, useState } from 'react'
-import { AppContext } from '../utils/AppContext'
+import React from 'react'
 
-const Modal = () => {
-    const {
-      showModal
-    } = useContext(AppContext) 
+const BuyBots = () => {
   return (
-    <div 
-    className='fixed inset-0 grid place-items-center bg-black/50 md:absolute'
-    >
-        <div 
-        className='absolute h-full w-full'
-        onClick={() => {
-        showModal(prev => !prev)
-    }}>
-        </div>
-        <div className='bg-[#131949] rounded-3xl py-6 px-6 shadow-2xl flex flex-col gap-5 mx-7 border border-blue-700'>
+<div className='hidden md:flex gap-5 flex-col items-center justify-center my-7 h-full flex-1/2 w-full'>
+          
+            {/* Buy bots card */}
+            <div className='bg-[#131949] rounded-3xl py-6 px-6 shadow-2xl flex flex-col gap-5 w-full border border-blue-700'>
               <p className='text-2xl font-bold text-white border-b-4 border-blue-500 pb-4 text-center'>
               Get Boosts at Discount Prices Now!
               </p>
@@ -54,8 +43,8 @@ const Modal = () => {
                 </button>
               </div>
             </div>
-    </div>
+        </div>
   )
 }
 
-export default Modal
+export default BuyBots
