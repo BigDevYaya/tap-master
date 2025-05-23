@@ -1,10 +1,16 @@
 import { LogIn } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Spinner } from "flowbite-react"
+import { AppContext } from '../utils/AppContext'
 
-const Login = ({name, onChange}) => {
-    const [isLoading, setLoading] = useState(false)
+const Login = () => {
+    const {
+      name,
+      isLoading,
+      setLoading,
+      setName
+    } = useContext(AppContext)
     const navigate = useNavigate();
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-blue-800 z-50"
@@ -23,7 +29,7 @@ const Login = ({name, onChange}) => {
     <input
       type="text"
       value={name}
-      onChange={onChange}
+      onChange={(e) => setName(e.target.value)}
       className="w-full bg-transparent border border-gray-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
 

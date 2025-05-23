@@ -1,7 +1,7 @@
-import Header from './Header'
-import Main from './Main'
-import MobileNav from './MobileNav'
-import Modals from './Modals'
+import Header from '../components/Header'
+import Main from '../components/Main'
+import MobileNav from '../components/MobileNav'
+import Modals from '../components/Modals'
 
 const Home = () => {
   

@@ -19,6 +19,7 @@ export const AppProvider = ({children}) => {
   const [pin, setPin] = useState()
   const [sendAmount, setSendAmount] = useState()
   const [walletAddress, setWalletAddress] = useState("")
+  const [isLoading, setLoading] = useState(false)
 
   let valid = false
 
@@ -76,6 +77,8 @@ export const AppProvider = ({children}) => {
         setSendAmount,
         walletAddress,
         setWalletAddress,
+        isLoading,
+        setLoading,
         checkInputs,
         makeTransfer,
         handleCoinClick,

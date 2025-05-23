@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router"
-import Home from "./components/Home"
+import Home from "./Pages/Home"
 import Login from "./Pages/Login"
 import { use, useState } from "react"
 
