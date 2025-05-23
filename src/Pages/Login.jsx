@@ -22,7 +22,7 @@ const Login = () => {
     setLoading(prev => !prev)
     setTimeout(() => {
         setLoading(prev => !prev)
-        navigate("/home")
+        navigate(`/${name}`)
     }, 2000)
   }}>
     <label className="block text-gray-200 uppercase">Enter your name</label>

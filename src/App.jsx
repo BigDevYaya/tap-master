@@ -11,7 +11,7 @@ function App() {
     <>
       <Routes>
         <Route index element={<Login name={name} onChange={(e) => setName(e.target.value)} />} />
-        <Route path="/home" element={<Home name={name} />} />      
+        <Route path="/:name" element={<Home name={name} />} />      
       </Routes>
     </>
   )
