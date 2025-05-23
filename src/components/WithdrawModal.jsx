@@ -1,8 +1,19 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { AppContext } from "../utils/AppContext"
 
 
-const WithdrawModal = ({modal, address, addressOnchange, sendAmount, amountOnchange, pin, pinOnchange, dollarCount, coinCount, makeTransfer, checkInputs}) => {
-    const [isLoading, setIsLoading] = useState(false);
+const WithdrawModal = () => {
+    const {
+      showWithdrawModal,
+      walletAddress,
+      setWalletAddress,
+      sendAmount,
+      setSendAmount,
+      pin,
+      setPin,
+      makeTransfer,
+      checkInputs
+    } = useContext(AppContext)
     
     
   return (
@@ -11,7 +22,7 @@ const WithdrawModal = ({modal, address, addressOnchange, sendAmount, amountOncha
         <div 
         className='absolute h-full w-full'
         onClick={() => {
-        modal(prev => !prev)
+        showWithdrawModal(prev => !prev)
         }}>
         </div>
   <form 
@@ -23,14 +34,14 @@ const WithdrawModal = ({modal, address, addressOnchange, sendAmount, amountOncha
         checkInputs()
         makeTransfer()
         setIsLoading(prev => !prev)
-        modal(prev => !prev)
+        showWithdrawModal(prev => !prev)
     }, 2000)
   }}>
     <label className="block text-gray-200">Wallet Address</label>
     <input
       type="text"
-      value={address}
-      onChange={addressOnchange}
+      value={walletAddress}
+      onChange={(e)=> setWalletAddress(e.target.value)}
       placeholder="ADDRESS"
       className="w-full bg-transparent border border-gray-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
@@ -40,7 +51,7 @@ const WithdrawModal = ({modal, address, addressOnchange, sendAmount, amountOncha
         <input
       type="number"
       value={sendAmount}
-      onChange={amountOnchange}
+      onChange={(e) => setSendAmount(e.target.value)}
       placeholder="AMOUNT"
       className="w-full bg-transparent border border-gray-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
@@ -53,7 +64,7 @@ const WithdrawModal = ({modal, address, addressOnchange, sendAmount, amountOncha
     <input
       type="number"
       value={pin}
-      onChange={pinOnchange}
+      onChange={(e) => setPin(e.target.value)}
       placeholder="PIN"
       className="w-full bg-transparent border border-gray-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
