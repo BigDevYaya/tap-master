@@ -11,6 +11,7 @@ const WithdrawModal = () => {
     setCount,
     setWithdrawn,
     setTransactions,
+    globalDate
   } = useContext(AppContext);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +44,7 @@ const WithdrawModal = () => {
           setCount(prev => prev - Number(amount * 100000))
           setWithdrawn(prev => prev += amount)
           setIsLoading(prev => !prev)
-          setTransactions(prev => [...prev, { amount: amount, type: 'debit', date: Date.now() }])
+          setTransactions(prev => [...prev, { amount: amount, type: 'debit', date: globalDate.now() }])
           showWithdrawModal(prev => !prev)
         }, 3000)
         resetForm()

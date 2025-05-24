@@ -5,6 +5,7 @@ export const AppContext = createContext();
 
 
 export const AppProvider = ({children}) => {
+    const globalDate = Date;
     const [count, setCount] = useState(() => {
     const saved = localStorage.getItem('count')
     
@@ -123,6 +124,8 @@ export const AppProvider = ({children}) => {
     localStorage.setItem('MAX', JSON.stringify(MAX))
 
     localStorage.setItem('availablePoints', JSON.stringify(availablePoints))
+
+    localStorage.setItem('name', JSON.stringify(name))
     
     localStorage.setItem('bot', JSON.stringify(bot))
 
@@ -133,14 +136,15 @@ export const AppProvider = ({children}) => {
     setCount(prev => prev +1);
     setTotal(prev => prev +1);
     setAvailablePoints(prev => Math.max(prev -1, 0));
-    setPlusOnes(prev => [...prev, { id: Date.now(), offset: Math.random() * 40 - 20 }])
+    setPlusOnes(prev => [...prev, { id: globalDate.now(), offset: Math.random() * 40 - 20 }])
   }
 
+  
   function updateCoin() {
     const moneyAdded = Math.floor(Math.random() * 10000)
     setCount(prev => prev + moneyAdded)
     setTotal(prev => prev + moneyAdded)
-    setTransactions(prev => [...prev, { amount: moneyAdded, type: 'credit', date: new Date().now()
+    setTransactions(prev => [...prev, { amount: moneyAdded, type: 'credit', date: globalDate.now()
  }]);
   }
 
@@ -174,7 +178,9 @@ export const AppProvider = ({children}) => {
         setMax,
         bot,
         setBot,
-        transactions, setTransactions
+        transactions, 
+        setTransactions,
+        globalDate
       }}
     >
       {children}
