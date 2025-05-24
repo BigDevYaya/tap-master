@@ -3,17 +3,17 @@ import { AppContext } from '../utils/AppContext'
 
 const BalanceCard = () => {
   const {
-    dollarCount,
-    count,
-    showWithdrawModal
+    showWithdrawModal,
+    dollarCount
   } = useContext(AppContext);
+
 
   return (
     <div className='
       bg-[#0d133a] rounded-3xl p-8 flex flex-col items-center gap-5 shadow-2xl
       border border-blue-800 transition-all duration-300 hover:border-blue-500
     '>
-      {/* Title */}
+
       <h2 className='
         text-blue-400 font-bold uppercase text-lg tracking-wider
         border-b-2 border-blue-600 pb-2 mb-2
@@ -29,8 +29,8 @@ const BalanceCard = () => {
         ${dollarCount}
       </p>
 
-      {/* Withdraw Button (conditional rendering) */}
-      {count >= 10 && (
+
+      {dollarCount >= 10 && (
         <button
           className='
             mt-4 px-10 py-3 bg-gradient-to-br from-cyan-500 to-blue-700

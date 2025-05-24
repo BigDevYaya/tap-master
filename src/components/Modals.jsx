@@ -7,10 +7,10 @@ import WithdrawModal from './WithdrawModal';
 
 const Modals = () => {
     const {
-        modal, 
-        profileModal,
-        historyModal,
-        withdrawModal
+      historyModal,
+      profileModal,
+      withdrawModal,
+      modal, 
     } = useContext(AppContext);
   return (
     <>

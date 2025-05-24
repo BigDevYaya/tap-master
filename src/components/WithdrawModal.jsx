@@ -1,28 +1,27 @@
 import { useContext, useState } from "react"
 import { AppContext } from "../utils/AppContext"
+import { Formik } from "formik"
+import { withdrawalSchema } from "../utils/schema"
 
 
 const WithdrawModal = () => {
   const {
     showWithdrawModal,
-    walletAddress,
-    setWalletAddress,
-    sendAmount,
-    setSendAmount,
-    pin,
-    setPin,
-    makeTransfer,
-    checkInputs,
-    isLoading,
-    setLoading
-  } = useContext(AppContext)
+    dollarCount,
+    setCount,
+    setWithdrawn,
+    setTransactions,
+  } = useContext(AppContext);
+
+  const [isLoading, setIsLoading] = useState(false);
 
 
+ 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black/70 z-50 animate-fadeIn" // Increased overlay opacity, added fade-in animation
+      className="fixed inset-0 flex items-center justify-center bg-black/70 z-50 animate-fadeIn" 
     >
-      {/* Clickable background to close modal */}
+      
       <div
         className='absolute h-full w-full'
         onClick={() => {
@@ -30,74 +29,99 @@ const WithdrawModal = () => {
         }}>
       </div>
 
-      {/* Withdrawal Form */}
-      <form
+      
+      <Formik
+      initialValues={{
+        walletAddress : '',
+        amount : '',
+        pin: ''
+      }}
+      validationSchema={withdrawalSchema(dollarCount)}
+      onSubmit={({amount}, {resetForm}) => {
+        setIsLoading(prev => !prev)
+        setTimeout(() => {
+          setCount(prev => prev - Number(amount * 100000))
+          setWithdrawn(prev => prev += amount)
+          setIsLoading(prev => !prev)
+          setTransactions(prev => [...prev, { amount: amount, type: 'debit', date: Date.now() }])
+          showWithdrawModal(prev => !prev)
+        }, 3000)
+        resetForm()
+      }}>
+        {
+          props => (
+            <form
         className="
           bg-[#0d133a] p-8 rounded-xl space-y-6 w-full max-w-md z-50
           shadow-2xl border border-blue-800 animate-slideUp
-        " // Consistent background, padding, rounding, spacing, shadow, border, and slide-up animation
-        onSubmit={(e) => {
-          e.preventDefault()
-          setLoading(prev => !prev)
-          setTimeout(() => {
-            checkInputs()
-            makeTransfer()
-            setLoading(prev => !prev)
-            showWithdrawModal(prev => !prev)
-          }, 2000)
-        }}>
+        "
+        onSubmit={props.handleSubmit}>
 
         {/* Wallet Address Input */}
         <div>
-          <label className="block text-blue-300 font-semibold text-lg mb-2">Wallet Address</label> {/* Brighter blue, bold, larger, bottom margin */}
+          <label className="block text-blue-300 font-semibold text-lg mb-2"
+          htmlFor="walletAddress">Wallet Address</label>
           <input
             type="text"
-            value={walletAddress}
-            onChange={(e) => setWalletAddress(e.target.value)}
+            id="walletAddress"
+            {...props.getFieldProps('walletAddress')}
             placeholder="e.g., 0xAbCdEf..."
             className="
               w-full bg-transparent border border-blue-700 text-white px-4 py-3 rounded-lg
               focus:outline-none focus:ring-2 focus:ring-cyan-500 placeholder-gray-400
               transition-all duration-200
-            " // Consistent border, padding, rounding, focus, placeholder, transition
+            "
           />
+          {
+            props.touched.walletAddress && props.errors.walletAddress ? <div className="text-red-600 text-sm">{props.errors.walletAddress}</div> : null
+          }
         </div>
 
         {/* Amount Input */}
         <div>
-          <label className="block text-blue-300 font-semibold text-lg mb-2">Amount (USD)</label> {/* Brighter blue, bold, larger, bottom margin */}
+          <label className="block text-blue-300 font-semibold text-lg mb-2"
+          htmlFor="amount">Amount (USD)</label>
           <input
             type="number"
-            value={sendAmount}
-            onChange={(e) => setSendAmount(e.target.value)}
+            id="amount"
+            {...props.getFieldProps('amount')}
             placeholder="e.g., 100"
             className="
               w-full bg-transparent border border-blue-700 text-white px-4 py-3 rounded-lg
               focus:outline-none focus:ring-2 focus:ring-cyan-500 placeholder-gray-400
               transition-all duration-200
-            " // Consistent border, padding, rounding, focus, placeholder, transition
+            " 
           />
-          {sendAmount && (
-            <p className="text-sm text-amber-300 italic mt-1 font-medium user-select-none"> {/* Consistent amber color, font, no selection */}
-              {`${sendAmount * 100000} EIA`}
+          {
+            props.touched.amount && props.errors.amount ? <div className="text-red-600 text-sm">{props.errors.amount}</div> : null
+          }
+          {props.values.amount && (
+            <p className="text-sm text-amber-300 italic mt-1 font-medium user-select-none"> 
+              {`${props.values.amount * 100000} EIA`}
             </p>
           )}
         </div>
 
         {/* Pin Input */}
         <div>
-          <label className="block text-blue-300 font-semibold text-lg mb-2">Pin</label> {/* Brighter blue, bold, larger, bottom margin */}
+          <label className="block text-blue-300 font-semibold text-lg mb-2"
+          htmlFor="pin">Pin</label>
           <input
-            type="password" // Changed type to password for security
-            value={pin}
-            onChange={(e) => setPin(e.target.value)}
+            type="password"
+            id="pin"
+            {
+              ...props.getFieldProps('pin')
+            }
             placeholder="****"
             className="
               w-full bg-transparent border border-blue-700 text-white px-4 py-3 rounded-lg
               focus:outline-none focus:ring-2 focus:ring-cyan-500 placeholder-gray-400
               transition-all duration-200
-            " // Consistent border, padding, rounding, focus, placeholder, transition
+            " 
           />
+          {
+            props.touched.pin && props.errors.pin ? <div className="text-red-600 text-sm">{props.errors.pin}</div> : null
+          }
         </div>
 
         {/* Submit Button */}
@@ -111,16 +135,18 @@ const WithdrawModal = () => {
             hover:scale-[1.02] hover:from-cyan-400 hover:to-blue-600
             active:scale-[0.98] active:shadow-inner
             disabled:opacity-50 disabled:cursor-not-allowed
-          " // Consistent gradient, padding, rounding, font, shadow, hover/active effects, disabled states
+          "
           disabled={isLoading}
         >
-          {isLoading ? (
-            <span className="loader"></span>
-          ) : (
-            <p>Confirm Withdrawal</p>
-          )}
+            {
+              isLoading ? <span class='loader'></span> : 'Confirm Withdrawal'
+            }
         </button>
       </form>
+          )
+        }
+      </Formik>
+      
     </div>
   )
 }

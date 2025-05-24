@@ -8,9 +8,9 @@ import {
 
 const MobileNav = () => {
     const {
-        showProfileModal,
-        showModal,
-        showHistoryModal
+      showHistoryModal,
+      showModal,
+      showProfileModal,
     } = useContext(AppContext);
   return (
 <nav className='fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-[#002080] rounded-2xl p-4 shadow-xl md:hidden'>

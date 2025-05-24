@@ -4,7 +4,11 @@ import { AppContext } from '../utils/AppContext'
 
 const Modal = () => {
     const {
-      showModal
+      showModal,
+      updateCoin,
+      setMax,
+      bot,
+      setBot
     } = useContext(AppContext) 
   return (
     <div 
@@ -16,7 +20,7 @@ const Modal = () => {
         showModal(prev => !prev)
     }}>
         </div>
-        <div className='bg-[#131949] rounded-3xl py-6 px-6 shadow-2xl flex flex-col gap-5 mx-7 border border-blue-700'>
+        <div className='bg-[#131949] rounded-3xl py-6 px-6 shadow-2xl flex flex-col gap-5 mx-7 border border-blue-700 z-50'>
               <p className='text-2xl font-bold text-white border-b-4 border-blue-500 pb-4 text-center'>
               Get Boosts at Discount Prices Now!
               </p>
@@ -27,6 +31,10 @@ const Modal = () => {
                 </p>
                 <button
                   className="bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-sm font-bold px-3 py-2 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95"
+                  onClick={(e)=>{
+                    e.preventDefault()
+                    updateCoin()
+                    }}
                 >
                   Buy
                 </button>
@@ -38,6 +46,9 @@ const Modal = () => {
                 </p>
                 <button
                   className="bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-sm font-bold px-3 py-2 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95"
+                  onClick={() =>{
+                    setMax(prev => prev + 100)
+                  } }
                 >
                   Buy
                 </button>
@@ -48,9 +59,13 @@ const Modal = () => {
                   Activate bot at <span className='text-green-400 font-bold text-xl'>$12</span>!
                 </p>
                 <button
-                  className="bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-sm font-bold px-3 py-2 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95"
+                  className="bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-sm font-bold px-3 py-2 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={() => setBot(prev => !prev)}
+                  disabled={bot}
                 >
-                  Buy
+                  {
+                    bot ? 'Acitivated' : 'Buy'
+                  }
                 </button>
               </div>
             </div>

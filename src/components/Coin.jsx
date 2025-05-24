@@ -4,9 +4,11 @@ import { AppContext } from '../utils/AppContext'
 
 const Coin = () => {
     const {
-        plusOnes,
-        handleCoinClick,
-        count
+      count,
+      plusOnes,
+      handleCoinClick,
+      availablePoints,
+      MAX
     } = useContext(AppContext);
   return (
     <div className='flex flex-col items-center justify-center gap-4'>
@@ -21,9 +23,10 @@ const Coin = () => {
 
 
           <div
-            onClick={handleCoinClick}
+            onClick={availablePoints > 0 ? handleCoinClick : undefined}
             className='relative cursor-pointer group transform transition hover:scale-110 active:scale-95'>
-            <div className='absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-500/10 rounded-full blur-xl animate-pulse'></div>
+            <div className='absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-500/10 rounded-full blur-xl animate-pulse'
+            ></div>
             <img
               src={heads}
               alt='Coin'
@@ -34,6 +37,9 @@ const Coin = () => {
 
           <p className='text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent animate-pulse'>
             {count} EIA
+          </p>
+          <p className='text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent animate-pulse'>
+            {availablePoints} / {MAX}
           </p>
         </div>
   )

@@ -7,7 +7,7 @@ import BaPro from './BaPro'
 
 const Main = () => {
   return (
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mx-5 '>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mx-5'>
         {/* Column 1: Balance & Profile (hidden on small) */}
         <BaPro />
         {/* Column 2: Coin Tap (always visible) */}
