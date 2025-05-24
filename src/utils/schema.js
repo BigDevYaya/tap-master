@@ -12,7 +12,8 @@ export const loginSchema = Yup.object({
 })
 
 export const withdrawalSchema = (dollarCount) => Yup.object({
-    walletAddress : Yup.string().matches(/^(0x)?[a-fA-F0-9]{40}$/, "Check wallet address").required('Wallet address is required'),
+    walletAddress : Yup.string().matches(/^(0x[a-fA-F0-9]{40}|[13][a-km-zA-HJ-NP-Z1-9]{25,34}|bc1[ac-hj-np-z02-9]{11,71}|[a-zA-Z0-9]{32,64})$/
+, "Check wallet address").required('Wallet address is required'),
     amount : Yup.number().typeError("Amount must be a number").test('is-less-than', 'Insufficient balance', value => value <= dollarCount).required('Amount is required'),
     pin: Yup.string()
     .required('Pin is required')
