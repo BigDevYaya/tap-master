@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router"
 import Home from "./Pages/Home"
 import Login from "./Pages/Login"
 import { use, useState } from "react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 
 
@@ -10,6 +11,7 @@ function App() {
   return (
     <>
       <Routes>
+        <SpeedInsights />
         <Route index element={<Login name={name} onChange={(e) => setName(e.target.value)} />} />
         <Route path="/:name" element={<Home name={name} />} />      
       </Routes>
