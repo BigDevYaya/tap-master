@@ -22,7 +22,7 @@ const BuyBots = () => {
 
               <div className='flex items-center justify-between bg-[#0b1033] p-4 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:bg-[#151c4e]'>
                 <p className='text-white text-lg'>
-                  Get 10000 coins now at <span className='text-green-400 font-bold text-xl'>$0.8</span>!
+                  Get Random amount of coins at <span className='text-green-400 font-bold text-xl'>$0.8</span>!
                 </p>
                 <button
                   className={

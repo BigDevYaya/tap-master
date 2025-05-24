@@ -27,7 +27,7 @@ const Modal = () => {
 
               <div className='flex items-center justify-between bg-[#0b1033] p-4 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:bg-[#151c4e]'>
                 <p className='text-white text-lg'>
-                  Get 100,000 coins now at <span className='text-green-400 font-bold text-xl'>$0.8</span>!
+                   Get Random amount of coins at <span className='text-green-400 font-bold text-xl'>$0.8</span>!
                 </p>
                 <button
                   className="bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-sm font-bold px-3 py-2 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95"
