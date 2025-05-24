@@ -14,13 +14,13 @@ const HistoryModal = () => {
       onClick={() => showHistoryModal(prev => !prev)}
     >
       <div
-        className='bg-gradient-to-br from-[#1a235c] to-[#0d123e] flex flex-col justify-center items-center max-h-1/2 p-10 space-y-8 text-xl rounded-xl border border-blue-700 shadow-2xl w-96 max-w-md relative bottom-36'
+        className='bg-gradient-to-br from-[#1a235c] to-[#0d123e] flex flex-col justify-center items-center  p-10 space-y-8 text-xl rounded-xl border border-blue-700 shadow-2xl w-96 max-w-md fixed inset-0 top-0 bottom-0 left-0 right-0 m-auto my-20 overflow-hidden'
         onClick={e => e.stopPropagation()}
       >
         <h2 className='text-white text-2xl font-extrabold tracking-wide mb-4'>Transaction History</h2>
 
         {transactions.length > 0 ? (
-          <ul className='w-full space-y-5 max-h-3/4 overflow-y-auto pr-3 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent'>
+          <ul className='w-full space-y-5 overflow-y-auto pr-3 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent'>
             {transactions.map((transaction, index) => (
               <li
                 key={index}
@@ -37,7 +37,7 @@ const HistoryModal = () => {
                 <div className='flex flex-col'>
                   {/* Display amount with appropriate color */}
                   <span className={`font-bold text-2xl ${transaction.type === 'credit' ? 'text-green-300' : 'text-red-300'}`}>
-                    {transaction.type === 'credit' ? '+' : '-'}${transaction.amount.toFixed(2)} {/* Add +/- and format to 2 decimal places */}
+                    {transaction.type === 'credit' ? '+' : '-'}${(transaction.amount/100000).toFixed(3)} {/* Add +/- and format to 2 decimal places */}
                   </span>
                   <span className='text-sm text-gray-300 capitalize'>{transaction.type}</span> {/* Display type clearly */}
                 </div>
