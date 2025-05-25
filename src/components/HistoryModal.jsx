@@ -1,12 +1,21 @@
 import { History } from 'lucide-react';
-import { useContext } from 'react';
+import { useContext, useRef, useEffect } from 'react';
 import { AppContext } from '../utils/AppContext';
 
 const HistoryModal = () => {
   const {
     showHistoryModal,
-    transactions // Assuming transactions now include a 'type' property
+    transactions,
+    clearHistory
   } = useContext(AppContext);
+
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = 0; // Scroll to top when transactions change
+    }
+  }, [transactions]);
 
   return (
     <div
@@ -14,14 +23,22 @@ const HistoryModal = () => {
       onClick={() => showHistoryModal(prev => !prev)}
     >
       <div
-        className='bg-gradient-to-br from-[#1a235c] to-[#0d123e] flex flex-col justify-center items-center  p-10 space-y-8 text-xl rounded-xl border border-blue-700 shadow-2xl w-96 max-w-md fixed inset-0 top-0 bottom-0 left-0 right-0 m-auto my-20 overflow-hidden'
+        className="
+    bg-gradient-to-br from-[#1a235c] to-[#0d123e]
+    flex flex-col justify-center items-center
+    p-10 space-y-8 text-xl rounded-xl border border-blue-700 shadow-2xl
+    w-96 max-w-md
+    max-h-[80vh] min-h-[200px]
+    overflow-y-auto
+    relative
+  "
         onClick={e => e.stopPropagation()}
       >
         <h2 className='text-white text-2xl font-extrabold tracking-wide mb-4'>Transaction History</h2>
 
         {transactions.length > 0 ? (
-          <ul className='w-full space-y-5 overflow-y-auto pr-3 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent'>
-            {transactions.map((transaction, index) => (
+          <ul ref={scrollRef} className='w-full space-y-5 overflow-y-auto pr-3 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent'>
+            {[...transactions].reverse().map((transaction, index) => (
               <li
                 key={index}
                 // Conditional styling based on transaction.type
@@ -51,6 +68,18 @@ const HistoryModal = () => {
             No past transactions recorded yet.
           </p>
         )}
+
+        <button 
+        className="
+            w-1/2 mt-2
+            bg-gradient-to-br from-cyan-500 to-blue-700
+            rounded font-bold text-white text-lg py-3 shadow-lg
+            transform transition-all duration-300
+            hover:scale-[1.02] hover:from-cyan-400 hover:to-blue-600
+            active:scale-[0.98] active:shadow-inner
+            disabled:opacity-50 disabled:cursor-not-allowed
+          "
+          onClick={clearHistory}>Clear</button>
 
         {/* Optional: Add a close button */}
         <button

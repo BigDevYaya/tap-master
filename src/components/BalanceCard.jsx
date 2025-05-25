@@ -30,7 +30,7 @@ const BalanceCard = () => {
       </p>
 
 
-      {dollarCount >= 10 && (
+      {dollarCount >= 5 && (
         <button
           className='
             mt-4 px-10 py-3 bg-gradient-to-br from-cyan-500 to-blue-700

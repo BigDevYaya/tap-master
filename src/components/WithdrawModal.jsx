@@ -38,12 +38,13 @@ const WithdrawModal = () => {
       }}
       validationSchema={withdrawalSchema(dollarCount)}
       onSubmit={({amount}, {resetForm}) => {
+        const numericAmount = Number(amount) * 100000;
         setIsLoading(prev => !prev)
-        setTimeout(() => {
-          setCount(prev => prev - Number(amount * 100000))
-          setWithdrawn(prev => prev += amount)
+        setTimeout(() =>{
+          setCount(prev => prev - (Number(amount) * 100000))
+          setWithdrawn(prev => prev + Number(amount))
           setIsLoading(prev => !prev)
-          setTransactions(prev => [...prev, { amount: amount, type: 'debit', date: Date.now() }])
+          setTransactions(prev => [...prev, { amount: numericAmount, type: 'debit', date: new Date().toLocaleString() }])
           showWithdrawModal(prev => !prev)
         }, 3000)
         resetForm()

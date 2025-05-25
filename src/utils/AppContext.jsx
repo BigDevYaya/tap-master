@@ -139,13 +139,17 @@ export const AppProvider = ({children}) => {
     setPlusOnes(prev => [...prev, { id: Date.now(), offset: Math.random() * 40 - 20 }])
   }
 
+  function clearHistory() {
+  setTransactions(prev => prev = [])
+ }
   
   function updateCoin() {
     const moneyAdded = Math.floor(Math.random() * 10000)
     setCount(prev => prev + moneyAdded)
     setTotal(prev => prev + moneyAdded)
-    setTransactions(prev => [...prev, { amount: moneyAdded, type: 'credit', date: Date.now()
+    setTransactions(prev => [...prev, { amount: moneyAdded, type: 'credit', date: new Date().toLocaleString()
  }]);
+
   }
 
   return (
@@ -180,6 +184,7 @@ export const AppProvider = ({children}) => {
         setBot,
         transactions, 
         setTransactions,
+        clearHistory
       }}
     >
       {children}

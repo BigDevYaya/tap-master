@@ -9,6 +9,9 @@ const BuyBots = () => {
     setMax,
     bot,
     setBot,
+    setCount,
+    setTransactions,
+    count
   } = useContext(AppContext);
 
   return (
@@ -67,7 +70,28 @@ const BuyBots = () => {
                   }
                 </button>
               </div>
+              <div className='flex items-center justify-between bg-[#0b1033] p-4 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-[1.02] hover:bg-[#151c4e]'>
+                <p className='text-white text-lg'>
+                  Donate to charity
+                </p>
+                <button
+                  className="bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-sm font-bold px-3 py-2 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={() => {
+                    const random = Math.floor(Math.random() * 1000) + 1;
+                    if(count < random) {
+                      alert(`You need at least ${random} coins to donate!`);
+                      return;
+                    } else {
+                      setCount(prev => prev - random)
+                      setTransactions(prev => [...prev, { amount: random, type: 'debit', date: new Date().toLocaleString() }])
+                    }
+                  }}
+                >
+                  Donate
+                </button>
+              </div>
             </div>
+            
         </div>
   )
 }
