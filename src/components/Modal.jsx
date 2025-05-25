@@ -23,7 +23,8 @@ const Modal = () => {
         showModal(prev => !prev)
     }}>
         </div>
-        <div className='bg-[#131949] rounded-3xl py-6 px-6 shadow-2xl flex flex-col gap-5 mx-7 border border-blue-700 z-50'>
+        <div className='bg-[#131949] rounded-3xl py-6 px-6 shadow-2xl flex flex-col gap-5 mx-7 border border-blue-700 z-50 animate-slideUp
+    transition-transform duration-300 ease-in-out'>
               <p className='text-2xl font-bold text-white border-b-4 border-blue-500 pb-4 text-center'>
               Get Boosts at Discount Prices Now!
               </p>

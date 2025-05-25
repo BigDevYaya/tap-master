@@ -6,10 +6,14 @@ const HistoryModal = () => {
   const {
     showHistoryModal,
     transactions,
-    clearHistory
+    clearHistory,
+    historyModal,
   } = useContext(AppContext);
 
   const scrollRef = useRef(null);
+
+
+
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -19,11 +23,11 @@ const HistoryModal = () => {
 
   return (
     <div
-      className='fixed inset-0 grid place-items-center bg-black/60 select-none backdrop-blur-sm z-50' // Added z-50 to ensure it's on top
+      className='fixed inset-0 grid place-items-center bg-black/60 select-none backdrop-blur-sm'
       onClick={() => showHistoryModal(prev => !prev)}
     >
       <div
-        className="
+        className={`
     bg-gradient-to-br from-[#1a235c] to-[#0d123e]
     flex flex-col justify-center items-center
     p-10 space-y-8 text-xl rounded-xl border border-blue-700 shadow-2xl
@@ -31,7 +35,8 @@ const HistoryModal = () => {
     max-h-[80vh] min-h-[200px]
     overflow-y-auto
     relative
-  "
+    transition-transform duration-300 ease-in-out
+  ${historyModal ? 'animate-slideUp' : 'animate-slideDown'}`}
         onClick={e => e.stopPropagation()}
       >
         <h2 className='text-white text-2xl font-extrabold tracking-wide mb-4'>Transaction History</h2>

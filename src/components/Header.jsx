@@ -4,7 +4,7 @@ import BalanceCard from './BalanceCard'
 
 const Header = () => {
   return (
-    <header className='items-center mx-10 my-5 md:hidden text-2xl'>
+    <header className='items-center mx-10 my-5 md:hidden text-2xl animate-slideUp'>
         <BalanceCard />
     </header>
   )
